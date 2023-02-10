@@ -1,29 +1,55 @@
+import React, { useState } from 'react';
 import './App.css';
+import App1 from './App1'
 
-function App() {
+const App = () => {
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const apps = [ <App1 />]
+
+  const [ activeApp, setActiveApp ] = useState(0)
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(`Name: ${name} Email: ${email} Password: ${password}`);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src="Octocat.png" className="App-logo" alt="logo" />
-        <p>
-          GitHub Codespaces <span className="heart">♥️</span> React
-        </p>
-        <p className="small">
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </p>
-      </header>
+    
+    <div className="parent-grid">
+      <div className="left-half">
+        <p className="title">Portfoliography</p>
+      </div>
+      <div className="right-half">
+        <form className="form" onSubmit={handleSubmit}>
+          <div className="row">
+            <p className="label">Login</p>
+          </div>
+          <div className="row">
+            <p className="label">Name:</p>
+            <input type="text" value={name} onChange={e => setName(e.target.value)} />
+          </div>
+          <div className="row">
+            <p className="label">Email:</p>
+            <input type="email" value={email} onChange={e => setEmail(e.target.value)} />
+          </div>
+          <div className="row">
+            <p className="label">Password:</p>
+            <input type="password" value={password} onChange={e => setPassword(e.target.value)} />
+          </div>
+          <div className="row">
+            <button type="submit" onClick = {() => {setActiveApp(0)}}>
+            Login
+            </button>
+          </div>
+          <div>{apps[activeApp]}</div>
+        </form>
+        
+      </div>
+      
     </div>
   );
-}
+};
 
 export default App;
